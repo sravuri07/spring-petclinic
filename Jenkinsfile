@@ -28,9 +28,9 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      steps {
-        checkout scm
-      }
+        steps {
+            git branch: 'main', url: 'https://github.com/sravuri07/spring-petclinic.git'
+        }
     }
 
     stage('Build & Test') {
