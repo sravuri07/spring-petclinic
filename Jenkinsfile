@@ -27,7 +27,6 @@ pipeline {
     ECR_REGISTRY   = "${ECR_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
     KUBE_CRED_ID   = 'kubeconfig-credentials'
   }
-  
 
   stages {
     stage('Checkout') {
@@ -76,6 +75,7 @@ pipeline {
         sh "docker push ${ECR_REGISTRY}/${ECR_REPO}:latest"
       }
     }
+  }
 
   post {
     success {
@@ -89,4 +89,3 @@ pipeline {
     }
   }
 }
-
