@@ -8,9 +8,7 @@ pipeline {
 
   options {
     timestamps()
-    ansiColor('xterm')
-    buildDiscarder(logRotator(numToKeepStr: '15'))
-    skipDefaultCheckout(true)
+    disableConcurrentBuilds()
   }
 
   parameters {
