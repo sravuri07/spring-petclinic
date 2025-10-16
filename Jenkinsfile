@@ -11,6 +11,7 @@ pipeline {
     githubPush()
   }
 
+
   parameters {
     booleanParam(name: 'BUILD_DOCKER', defaultValue: false, description: 'Also build Docker image (dev only)')
   }
