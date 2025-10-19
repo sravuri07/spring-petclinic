@@ -59,7 +59,10 @@ class OwnerController {
 		dataBinder.setDisallowedFields("id");
 	}
 
-	@ModelAttribute("owner")
+	@ModelAttribute("owner") /*
+								 * ModelAttribute annotation basically searches for the
+								 * owner in the db when a request comes
+								 */
 	public Owner findOwner(@PathVariable(name = "ownerId", required = false) Integer ownerId) {
 		return ownerId == null ? new Owner()
 				: this.owners.findById(ownerId)
@@ -168,6 +171,28 @@ class OwnerController {
 				"Owner not found with id: " + ownerId + ". Please ensure the ID is correct "));
 		mav.addObject(owner);
 		return mav;
+	}
+
+	@PostMapping("/owners/{ownerId}/delete")
+	public String deleteOwner(Owner owner, RedirectAttributes redirectAttributes) {
+		try {
+			// Check if owner has pets
+			if (!owner.getPets().isEmpty()) {
+				redirectAttributes.addFlashAttribute("error", "Cannot delete owner. Owner has " + owner.getPets().size()
+						+ " pet(s). " + "Please delete all pets first or transfer them to another owner.");
+				return "redirect:/owners/" + owner.getId();
+			}
+
+			// Delete the owner
+			this.owners.deleteById(owner.getId());
+			redirectAttributes.addFlashAttribute("message",
+					"Owner " + owner.getFirstName() + " " + owner.getLastName() + " has been deleted successfully.");
+			return "redirect:/owners";
+		}
+		catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", "Error deleting owner: " + e.getMessage());
+			return "redirect:/owners/" + owner.getId();
+		}
 	}
 
 }
