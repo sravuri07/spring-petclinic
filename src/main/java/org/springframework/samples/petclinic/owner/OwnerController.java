@@ -175,24 +175,23 @@ class OwnerController {
 
 	@PostMapping("/owners/{ownerId}/delete")
 	public String deleteOwner(Owner owner, RedirectAttributes redirectAttributes) {
-		try {
-			// Check if owner has pets
-			if (!owner.getPets().isEmpty()) {
-				redirectAttributes.addFlashAttribute("error", "Cannot delete owner. Owner has " + owner.getPets().size()
-						+ " pet(s). " + "Please delete all pets first or transfer them to another owner.");
-				return "redirect:/owners/" + owner.getId();
-			}
+		// try {
+		// 	// Check if owner has pets
+		// 	if (!owner.getPets().isEmpty()) {
+		// 		redirectAttributes.addFlashAttribute("error", "Cannot delete owner. Owner has " + owner.getPets().size()
+		// 				+ " pet(s). " + "Please delete all pets first or transfer them to another owner.");
+		// 		return "redirect:/owners/" + owner.getId();
+		// 	}
 
 			// Delete the owner
 			this.owners.deleteById(owner.getId());
 			redirectAttributes.addFlashAttribute("message",
 					"Owner " + owner.getFirstName() + " " + owner.getLastName() + " has been deleted successfully.");
 			return "redirect:/owners";
-		}
-		catch (Exception e) {
-			redirectAttributes.addFlashAttribute("error", "Error deleting owner: " + e.getMessage());
-			return "redirect:/owners/" + owner.getId();
-		}
+		// }
+		// catch (Exception e) {
+		// 	redirectAttributes.addFlashAttribute("error", "Error deleting owner: " + e.getMessage());
+		// 	return "redirect:/owners/" + owner.getId();
+		// }
 	}
-
 }
