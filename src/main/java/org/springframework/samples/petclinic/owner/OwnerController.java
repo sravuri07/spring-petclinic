@@ -174,19 +174,19 @@ class OwnerController {
 	}
 
 	// Delete Owner Button
-	@PostMapping("/owners/{ownerId}/delete")
-	public String deleteOwner(Owner owner, RedirectAttributes redirectAttributes) {
-		try {
-			// Directly delete the owner
-			this.owners.deleteById(owner.getId());
-			redirectAttributes.addFlashAttribute("message",
-					"Owner " + owner.getFirstName() + " " + owner.getLastName() + " has been deleted successfully.");
-			return "redirect:/owners";
-		}
-		catch (Exception e) {
-			redirectAttributes.addFlashAttribute("error", "Error deleting owner: " + e.getMessage());
-			return "redirect:/owners/" + owner.getId();
-		}
-	}
+	// @PostMapping("/owners/{ownerId}/delete")
+	// public String deleteOwner(Owner owner, RedirectAttributes redirectAttributes) {
+	// 	try {
+	// 		// Directly delete the owner
+	// 		this.owners.deleteById(owner.getId());
+	// 		redirectAttributes.addFlashAttribute("message",
+	// 				"Owner " + owner.getFirstName() + " " + owner.getLastName() + " has been deleted successfully.");
+	// 		return "redirect:/owners";
+	// 	}
+	// 	catch (Exception e) {
+	// 		redirectAttributes.addFlashAttribute("error", "Error deleting owner: " + e.getMessage());
+	// 		return "redirect:/owners/" + owner.getId();
+	// 	}
+	// }
 
 }
