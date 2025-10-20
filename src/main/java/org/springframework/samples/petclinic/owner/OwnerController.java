@@ -173,7 +173,7 @@ class OwnerController {
 		return mav;
 	}
 
-	// Delete Owner method
+	// Delete Owner Button
 	@PostMapping("/owners/{ownerId}/delete")
 	public String deleteOwner(Owner owner, RedirectAttributes redirectAttributes) {
 		try {
